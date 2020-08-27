@@ -2,18 +2,44 @@
 //
 
 #include <iostream>
+//Esto se tiene que quitar en un futuro...
+using namespace std;
 
-int main()
-{
-    std::cout << "Hello World!\n";
+void imprimirSubMenu() {
+	system("cls");
+	cout << "\t\t >>>> Recaudacion del Hotel <<<<" << endl << endl;
+	
+	cout << "\t1. Con los clientes, “TODO INCLUIDO”" << endl;
+	cout << "\t2. Con los clientes, “Sin TODO INCLUIDO”" << endl;
+	cout << "\t3. Con todos los clientes que hay en el hotel" << endl;
+	cout << "\t0. Salir" << endl;
 }
 
-// Ejecutar programa: Ctrl + F5 o menú Depurar > Iniciar sin depurar
-// Depurar programa: F5 o menú Depurar > Iniciar depuración
+void imprimirMenu() {
+	system("cls");
+	cout << "\t\t >>>> MENU <<<<" << endl << endl;
 
-// Sugerencias para primeros pasos: 1. Use la ventana del Explorador de soluciones para agregar y administrar archivos
-//   2. Use la ventana de Team Explorer para conectar con el control de código fuente
-//   3. Use la ventana de salida para ver la salida de compilación y otros mensajes
-//   4. Use la ventana Lista de errores para ver los errores
-//   5. Vaya a Proyecto > Agregar nuevo elemento para crear nuevos archivos de código, o a Proyecto > Agregar elemento existente para agregar archivos de código existentes al proyecto
-//   6. En el futuro, para volver a abrir este proyecto, vaya a Archivo > Abrir > Proyecto y seleccione el archivo .sln
+	cout << "\t1. Cuantas habitaciones estan libres" << endl;
+	cout << "\t2. Cuantas estan en mantenimiento" << endl;
+	cout << "\t3. Cuantas habitaciones ocupadas" << endl;
+	cout << "\t4. Cuantas hay desocupadas por cantidad de camas" << endl;
+	cout << "\t5. Realizar la ocupacion de la habitacion" << endl;
+	cout << "\t6. Pagar la habitacion utilizando el No. de cedula" << endl;
+	cout << "\t7. Liberar la habitacion utilizando el No. de cedula" << endl;
+	cout << "\t8. Cuantas personas adultas hay el dia de hoy" << endl;
+	cout << "\t9. Cuantos ninos existen hoy en el hotel" << endl;
+	cout << "\t10. Saber cuanto dinero recaudo hoy el hotel" << endl;
+	cout << "\t0. Salir" << endl;
+}
+int main()
+{
+	int op;
+	do {
+		imprimirMenu();
+		cout << "\t\tSeleccione su opcion: ";
+		cin >> op;
+		// No operacion. hay que agregar switch o algo
+	} while(op != 0);
+	system("Pause");
+	std::cout << "Hello World!\n";
+}

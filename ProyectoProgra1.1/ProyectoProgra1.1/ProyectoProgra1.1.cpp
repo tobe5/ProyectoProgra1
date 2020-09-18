@@ -1,7 +1,8 @@
 // ProyectoProgra1.1.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
 //
-
+#include <stdlib.h>
 #include <iostream>
+#include "Contenedora.h"
 //Esto se tiene que quitar en un futuro...
 using namespace std;
 

@@ -105,3 +105,36 @@ string Contenedora::habitacionLibrePorCama(int camas) {
 	x << "hay " << conT << " habitaciones de tercera clase" << endl;
 	return x.str();
 }
+
+
+
+
+string Contenedora::AdultosActuales() {
+	stringstream x;
+	int conAduls = 0;
+	for (int i = 0; i < tamN; i++)
+		for (int j = 0; j < tamM; j++) {
+			// Posiblemente tenemos que anadir un if aqui y para todos los for para ver si vec[][] != NULL
+			if (vec1[i][j]->getInfo() != NULL) {
+				conAduls+= vec1[i][j]->getInfo()->getNumAdultos();
+			}
+		}
+	x << " Mostrando habitaciones" << endl;
+	x << "Hay " << conAduls << " adultos en el hotel hoy" << endl;
+	return x.str();
+}
+
+string Contenedora::NinosActuales() {
+	stringstream x;
+	int conNinos = 0;
+	for (int i = 0; i < tamN; i++)
+		for (int j = 0; j < tamM; j++) {
+			// Posiblemente tenemos que anadir un if aqui y para todos los for para ver si vec[][] != NULL
+			if (vec1[i][j]->getInfo() != NULL) {
+				conNinos += vec1[i][j]->getInfo()->getNumNinos();
+			}
+		}
+	x << " Mostrando habitaciones" << endl;
+	x << "Hay " << conNinos << " ninos en el hotel hoy" << endl;
+	return x.str();
+}

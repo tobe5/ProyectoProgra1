@@ -1,7 +1,14 @@
 #include"Habitacion.h"
 
 Habitacion::Habitacion() {
-	ptrInfo = NULL;
+
+	// modificaciones aqui para probar con datos quemados para que sea mas rapido
+
+	//ptrInfo = NULL;
+	ptrInfo = new Info();
+	ptrInfo->setNumNinos(rand() % 3);
+	ptrInfo->setNumAdultos(rand() % 13);
+
 	ptrCliente = NULL;
 	int num = rand() % 3 ;
 	if (num==0)

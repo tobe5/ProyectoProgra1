@@ -40,6 +40,8 @@ int main()
 	cout << cont->habitacionEnMantenimiento();
 	cout << cont->habitacionOcupada();
 	cout << cont->habitacionLibrePorCama(3);
+	cout << cont->AdultosActuales();
+	cout << cont->NinosActuales();
 	/*int op;
 	do {
 		imprimirMenu();

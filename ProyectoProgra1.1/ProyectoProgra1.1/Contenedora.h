@@ -19,4 +19,7 @@ public:
 	string habitacionEnMantenimiento();
 	string habitacionOcupada();
 	string habitacionLibrePorCama(int);
+
+	string AdultosActuales();
+	string NinosActuales();
 };

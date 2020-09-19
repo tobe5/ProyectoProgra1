@@ -20,7 +20,7 @@ Habitacion::Habitacion() {
 		else
 			estado = 'L';
 	};	
-	Id = " ";
+	Id = "CR";
 	numDeCamas = 2 + rand() % (6 - 2);
 	 if (num == 0)
 		clase = "Primera";
@@ -32,12 +32,13 @@ Habitacion::Habitacion() {
 			clase = "Tercera";
 	};
 }
-Habitacion::Habitacion(Info* ptrI, Cliente* ptrC, string NumId, char Estado) {
+Habitacion::Habitacion(Info* ptrI, Cliente* ptrC, string NumId, char Estado,int hora) {
 	ptrInfo = ptrI;
 	ptrCliente = ptrC;
 	Id = NumId;
 	estado = Estado;
 	numDeCamas = 3 + rand() % (5 - 3);
+	horaEntrada = hora;
 }
 Habitacion:: ~Habitacion() {
 	if (ptrCliente != NULL) delete ptrCliente;
@@ -88,4 +89,10 @@ string Habitacion::toString() {
 }
 string Habitacion::getClase() {
 	return clase;
+}
+void Habitacion::setHora(int hora) {
+	horaEntrada = hora;
+}
+int Habitacion::getHora() {
+	return horaEntrada;
 }

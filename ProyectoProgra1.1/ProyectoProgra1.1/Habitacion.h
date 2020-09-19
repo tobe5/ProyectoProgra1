@@ -11,16 +11,18 @@ private:
 	char estado;
 	int numDeCamas;
 	string clase;
-
+	int horaEntrada;
 public:
 	Habitacion();
-	Habitacion(Info* ptrI, Cliente* ptrC, string NumId, char Estado);
+	Habitacion(Info* ptrI, Cliente* ptrC, string NumId, char Estado,int hora);
 	virtual ~Habitacion();
 	void setInfo(Info*);
 	void setCliente(Cliente*);
 	void setId(string);
 	void setEstado(char);
 	void setNumCamas(int);
+	void setHora(int);
+	int getHora();
 	string getClase();
 	Info* getInfo();
 	Cliente* getCliente();

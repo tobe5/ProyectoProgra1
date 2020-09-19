@@ -34,14 +34,19 @@ void imprimirMenu() {
 }*/
 int main()
 {
+	Cliente* cli = new Cliente("118060876", "tony", 19, 'E', 63072446, "cr240601");
+	Info* inf = new Info(2, 2, 3, 1);
 	Contenedora* cont = new Contenedora(3,3);
 	cout<<cont->toString();
-	cout << cont->mostrarHabitacionesLibres();
-	cout << cont->habitacionEnMantenimiento();
-	cout << cont->habitacionOcupada();
-	cout << cont->habitacionLibrePorCama(3);
-	cout << cont->AdultosActuales();
-	cout << cont->NinosActuales();
+	//cout << cont->mostrarHabitacionesLibres();
+	//cout << cont->habitacionEnMantenimiento();
+	//cout << cont->habitacionOcupada();
+	//cout << cont->habitacionLibrePorCama(3);
+	//cout << cont->AdultosActuales();
+	//cout << cont->NinosActuales();
+	if (cont->ingresoHabitacion(cli,inf,"CR",7))
+		cout<<"se Ingreso"; 
+	cout << cont->toString();
 	/*int op;
 	do {
 		imprimirMenu();

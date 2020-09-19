@@ -10,8 +10,32 @@ private:
 	int tamM; // tamaño del vector de Directores.
 	int can; // cantidad de Directores.
 	Habitacion*** vec1; // Vector de Directores.
-
+	/*static float costNoInluido1Per;
+	static float costNoIncluido2Per;
+	static float costNoIncluido3Per;
+	static float costNoIncluido4Per;
+	static float desc1PNoche;
+	static double desc2PNoche;
+	static double desc3PNoche;
+	static double desc4PNoche;
+	static double primera;
+	static double Segunda;
+	static float adultoTodoIncluido;
+	static float ninoTodoIncluido;*/
+	 long double costNoInluido1Per = 150;
+	 long double costNoIncluido2Per = 250;
+	 long double costNoIncluido3Per = 350;
+	 long double costNoIncluido4Per = 400;
+	 long double desc1PNoche = 0.25;
+	 long double desc2PNoche = 0.2;
+	 long double desc3PNoche = 0.15;
+	 long double desc4PNoche = 0.1;
+	 long double primera = 0.3;
+	 long double Segunda = 0.2;
+	 long double adultoTodoIncluido = 300;
+	 long double ninoTodoIncluido = 200;
 public:
+	
 	Contenedora(int, int);
 	virtual ~Contenedora();
 	string toString() const;
@@ -19,7 +43,12 @@ public:
 	string habitacionEnMantenimiento();
 	string habitacionOcupada();
 	string habitacionLibrePorCama(int);
-
+	bool ingresoHabitacion(Cliente*,Info*,string,int);
 	string AdultosActuales();
 	string NinosActuales();
+	double pagarHabitacion(string);
+	void liberarHabitacion(string);
+	double dineroTodoIncluido();
+	double dineroNoTodoIncluido();
+	string dineroTotal();
 };

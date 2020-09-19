@@ -10,6 +10,8 @@ private:
 	string Id;
 	char estado;
 	int numDeCamas;
+	string clase;
+
 public:
 	Habitacion();
 	Habitacion(Info* ptrI, Cliente* ptrC, string NumId, char Estado);
@@ -19,6 +21,7 @@ public:
 	void setId(string);
 	void setEstado(char);
 	void setNumCamas(int);
+	string getClase();
 	Info* getInfo();
 	Cliente* getCliente();
 	string getId();

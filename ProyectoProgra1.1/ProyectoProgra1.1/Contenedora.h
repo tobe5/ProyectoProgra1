@@ -15,4 +15,8 @@ public:
 	Contenedora(int, int);
 	virtual ~Contenedora();
 	string toString() const;
+	string mostrarHabitacionesLibres();
+	string habitacionEnMantenimiento();
+	string habitacionOcupada();
+	string habitacionLibrePorCama(int);
 };

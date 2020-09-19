@@ -3,10 +3,27 @@
 Habitacion::Habitacion() {
 	ptrInfo = NULL;
 	ptrCliente = NULL;
+	int num = rand() % 3 ;
+	if (num==0)
+		estado = 'O';
+	else
+	{
+		if (num==1)
+			estado = 'M';
+		else
+			estado = 'L';
+	};	
 	Id = " ";
-	estado = ' ';
-	numDeCamas = 3 + rand() % (5 - 3);
-
+	numDeCamas = 2 + rand() % (6 - 2);
+	 if (num == 0)
+		clase = "Primera";
+	else
+	{
+		if (num == 1)
+			clase = "Segunda";
+		else
+			clase = "Tercera";
+	};
 }
 Habitacion::Habitacion(Info* ptrI, Cliente* ptrC, string NumId, char Estado) {
 	ptrInfo = ptrI;
@@ -48,7 +65,9 @@ string Habitacion::toString() {
 	x << "--------Mostrando la Informacion--------" << endl;
 	x << "Numero de Habitacion: " << Id << endl <<
 		"Estado de la Habitacion: " << estado << endl <<
-		"Numero de camas: " << numDeCamas << endl;
+		"Numero de camas: " << numDeCamas << endl <<
+		"Clase de la habitacion: " << clase<<endl;
+
 	if (ptrCliente) {
 		x << ptrCliente->toString();
 	}
@@ -59,4 +78,7 @@ string Habitacion::toString() {
 	else x << "Esta habitacion no tiene informacion asociada" << endl;
 
 	return x.str();
+}
+string Habitacion::getClase() {
+	return clase;
 }

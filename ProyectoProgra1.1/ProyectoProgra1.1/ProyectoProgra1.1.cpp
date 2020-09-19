@@ -5,7 +5,7 @@
 #include "Contenedora.h"
 //Esto se tiene que quitar en un futuro...
 using namespace std;
-
+/*
 void imprimirSubMenu() {
 	system("cls");
 	cout << "\t\t >>>> Recaudacion del Hotel <<<<" << endl << endl;
@@ -31,16 +31,22 @@ void imprimirMenu() {
 	cout << "\t9. Cuantos ninos existen hoy en el hotel" << endl;
 	cout << "\t10. Saber cuanto dinero recaudo hoy el hotel" << endl;
 	cout << "\t0. Salir" << endl;
-}
+}*/
 int main()
 {
-	int op;
+	Contenedora* cont = new Contenedora(3,3);
+	cout<<cont->toString();
+	cout << cont->mostrarHabitacionesLibres();
+	cout << cont->habitacionEnMantenimiento();
+	cout << cont->habitacionOcupada();
+	cout << cont->habitacionLibrePorCama(3);
+	/*int op;
 	do {
 		imprimirMenu();
 		cout << "\t\tSeleccione su opcion: ";
 		cin >> op;
 		// No operacion. hay que agregar switch o algo
 	} while(op != 0);
-	system("Pause");
+	system("Pause"); */
 	std::cout << "Hello World!\n";
 }

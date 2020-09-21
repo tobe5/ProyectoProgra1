@@ -1,6 +1,7 @@
 #pragma once
 #include"Cliente.h"
 #include"info.h"
+#include"Hora.h"
 #include<time.h>
 
 class Habitacion {
@@ -11,18 +12,19 @@ private:
 	char estado;
 	int numDeCamas;
 	string clase;
-	int horaEntrada;
+	Hora* ptrHora;
+	static int idHabitaciones;
 public:
 	Habitacion();
-	Habitacion(Info* ptrI, Cliente* ptrC, string NumId, char Estado,int hora);
+	Habitacion(Info* ptrI, Cliente* ptrC, char Estado,Hora* hora);
 	virtual ~Habitacion();
 	void setInfo(Info*);
 	void setCliente(Cliente*);
 	void setId(string);
 	void setEstado(char);
 	void setNumCamas(int);
-	void setHora(int);
-	int getHora();
+	void setPtrHora(Hora*);
+	Hora* getPtrHora();
 	string getClase();
 	Info* getInfo();
 	Cliente* getCliente();

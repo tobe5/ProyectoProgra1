@@ -9,12 +9,12 @@ private:
 	string nombre;
 	int edad;
 	char metodoPago;
-	int numTelefono;
+	string numTelefono;
 	string numCuenta;
 
 public:
 	Cliente();
-	Cliente(string ced, string nom, int ed, char pago, int num, string cuenta);
+	Cliente(string ced, string nom, int ed, char pago, string num, string cuenta);
 	virtual ~Cliente();
 	string toString();
 
@@ -22,14 +22,14 @@ public:
 	void setNombre(string nom);
 	void setMetodoPago(char pago);
 	void setEdad(int ed);
-	void setNumtelefono(int num);
+	void setNumtelefono(string num);
 	void setNumCuenta(string cuenta);
 
 	char getmetodoPago();
 	string getCedula();
 	string getNombre();
 	int getEdad();
-	int getNumTelefono();
+	string getNumTelefono();
 	string getNumCuenta();
 	bool mayorEdad();
 

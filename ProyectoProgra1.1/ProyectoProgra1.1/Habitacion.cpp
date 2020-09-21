@@ -1,28 +1,16 @@
 #include"Habitacion.h"
 
+
+int Habitacion::idHabitaciones = 1;
 Habitacion::Habitacion() {
-
-	// modificaciones aqui para probar con datos quemados para que sea mas rapido
-
-	//ptrInfo = NULL;
-	ptrInfo = new Info();
-	ptrInfo->setNumNinos(rand() % 3);
-	ptrInfo->setNumAdultos(rand() % 13);
-
+	ptrInfo = NULL;
 	ptrCliente = NULL;
-	int num = rand() % 3 ;
-	if (num==0)
-		estado = 'O';
-	else
-	{
-		if (num==1)
-			estado = 'M';
-		else
-			estado = 'L';
-	};	
-	Id = "CR";
+	ptrHora = NULL;
+	estado = 'L';
+	Id = to_string(idHabitaciones++);
 	numDeCamas = 2 + rand() % (6 - 2);
-	 if (num == 0)
+	int num = rand() % 3;
+	if (num == 0)
 		clase = "Primera";
 	else
 	{
@@ -32,13 +20,13 @@ Habitacion::Habitacion() {
 			clase = "Tercera";
 	};
 }
-Habitacion::Habitacion(Info* ptrI, Cliente* ptrC, string NumId, char Estado,int hora) {
+Habitacion::Habitacion(Info* ptrI, Cliente* ptrC, char Estado, Hora* hora) {
+	Id = to_string(idHabitaciones++);
 	ptrInfo = ptrI;
 	ptrCliente = ptrC;
-	Id = NumId;
 	estado = Estado;
 	numDeCamas = 3 + rand() % (5 - 3);
-	horaEntrada = hora;
+	ptrHora = hora;
 }
 Habitacion:: ~Habitacion() {
 	if (ptrCliente != NULL) delete ptrCliente;
@@ -63,8 +51,18 @@ void Habitacion::setNumCamas(int num) {
 	numDeCamas = num;
 
 }
-Info* Habitacion::getInfo() { return ptrInfo; }
-Cliente* Habitacion::getCliente() { return ptrCliente; }
+Info* Habitacion::getInfo() {
+	if (ptrInfo)
+		return ptrInfo;
+	else
+		return NULL;
+}
+Cliente* Habitacion::getCliente() { 
+	if (ptrCliente)
+		return ptrCliente;
+	else
+		return NULL;
+}
 string Habitacion::getId() { return Id; }
 char Habitacion::getEstado() { return estado; }
 int Habitacion::getnumCamas() { return numDeCamas; }
@@ -79,20 +77,23 @@ string Habitacion::toString() {
 	if (ptrCliente) {
 		x << ptrCliente->toString();
 	}
-	else x << "La Habitacion esta desocupada " << endl;
+	else { x << "La Habitacion esta desocupada" << endl; }
 	if (ptrInfo) {
 		x << ptrInfo->toString();
 	}
-	else x << "Esta habitacion no tiene informacion asociada" << endl;
-
+	else { x << "Esta habitacion no tiene informacion asociada" << endl; }
+	x << "-------------Fin Habitacion-------------" << endl;
 	return x.str();
 }
 string Habitacion::getClase() {
 	return clase;
 }
-void Habitacion::setHora(int hora) {
-	horaEntrada = hora;
+void Habitacion::setPtrHora(Hora* hora) {
+	ptrHora = hora;
 }
-int Habitacion::getHora() {
-	return horaEntrada;
+Hora* Habitacion::getPtrHora() {
+	if(ptrHora) {
+		return ptrHora;
+	}
+	return NULL;
 }

@@ -42,9 +42,10 @@ bool Info::getTodoIncluido() {
 }
 string Info::toString() {
 	stringstream s;
+	s << " ------------Informacion------------ " << endl;
 	s << "Numero de adultos " << numAdultos << endl
 		<< "Numero de ninos " << numNinos << endl
 		<< "Numero de dias " << cantDias << endl;
-	s << "Todo incluido: " << todoIncluido;
+	s << "Todo incluido: " << todoIncluido << endl;
 	return s.str();
 }

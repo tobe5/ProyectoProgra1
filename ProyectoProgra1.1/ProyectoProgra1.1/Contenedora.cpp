@@ -52,7 +52,7 @@ string Contenedora::mostrarHabitacionesLibres() {
 	x << contador << endl;
 	return x.str();
 }
-string Contenedora::habitacionEnMantenimiento(){
+string Contenedora::habitacionesEnMantenimiento(){
 	int contador = 0;
 	stringstream x;
 	x << "Mostrando cantidad de habitaciones en mantenimiento: ";
@@ -65,7 +65,7 @@ string Contenedora::habitacionEnMantenimiento(){
 	return x.str();
 
 }
-string Contenedora::habitacionOcupada(){
+string Contenedora::habitacionesOcupadas(){
 	int contador = 0;
 	stringstream x;
 	x << "Mostrando cantidad de habitaciones ocupadas: ";
@@ -136,142 +136,104 @@ string Contenedora::NinosActuales() {
 	x << "Hay " << conNinos << " ninos en el hotel hoy" << endl;
 	return x.str();
 }
-bool Contenedora::ingresoHabitacion(Cliente *cli, Info* inf,string habId,int hora) { //Para hacer el ingreso se le solicita el ID de la habitacion????
+bool Contenedora::ingresoHabitacion(Cliente *cli, Info* inf,string habId, Hora* hora) { //Para hacer el ingreso se le solicita el ID de la habitacion????
 	for (int i = 0; i < tamN; i++)
 		for (int j = 0; j < tamM; j++)
-			if (vec1[i][j]->getId().compare(habId) == 0) {
+			if (vec1[i][j]->getId().compare(habId) == 0 && vec1[i][j]->getEstado() == 'L') {
 				vec1[i][j]->setCliente(cli);
 				vec1[i][j]->setInfo(inf);
-				vec1[i][j]->setHora(hora);
-				return true;    //True si se ingreso exitosamente 
+				vec1[i][j]->setPtrHora(hora);
+				vec1[i][j]->setEstado('O');
+				return true;    //True si se ingreso exitosamente 	
 			}
 	return false; //false si no se inserto adecuadamente 
 }
 double Contenedora::pagarHabitacion(string ced){
-	long double total=0;
+	long double totalIncluido=0, totalNoIncluido=0;
 	long int personas = 0;
 	long int ninos = 0;
 	long int adultos = 0;
 	for (int i = 0; i < tamN; i++)
 		for (int j = 0; j < tamM; j++)
-			if (vec1[i][j]->getCliente()->getCedula().compare(ced) == 0) {
+			if (vec1[i][j]->getCliente() && vec1[i][j]->getCliente()->getCedula().compare(ced) == 0) {
 				personas += (vec1[i][j]->getInfo()->getNumAdultos() + vec1[i][j]->getInfo()->getNumNinos());
 				ninos += vec1[i][j]->getInfo()->getNumNinos();
 				adultos += vec1[i][j]->getInfo()->getNumAdultos();
-				if (vec1[i][j]->getInfo()->getTodoIncluido() == 1) {
-					total += (ninos * ninoTodoIncluido);
-					total += (adultos * adultoTodoIncluido);
 
-
+				if (vec1[i][j]->getInfo()->getTodoIncluido() == 1) { //no se les hace descuento
+					totalIncluido += (ninos * ninoTodoIncluido);
+					totalIncluido += (adultos * adultoTodoIncluido);
+					if (vec1[i][j]->getClase() == "Primera") {
+						totalIncluido += totalIncluido * primera;
+					}
+					else if (vec1[i][j]->getClase() == "Segunda") {
+						totalIncluido += totalIncluido * Segunda;
+					}
+					ganancias += totalIncluido;
+					gananciasIncluido += totalIncluido;
+					return totalIncluido;
 				}
-				else if (vec1[i][j]->getHora() > 6) {
-
+				else if (vec1[i][j]->getPtrHora()->getHora() >= 18) { //no es todo incluido se les pede hacer descuento
 					if (personas == 1) {
-						total += costNoInluido1Per - (costNoInluido1Per * desc1PNoche);
+						totalNoIncluido += costNoInluido1Per - (costNoInluido1Per * desc1PNoche);
 					}
 					else if (personas == 2) {
-						total += costNoIncluido2Per - (costNoIncluido2Per * desc2PNoche);
+						totalNoIncluido += costNoIncluido2Per - (costNoIncluido2Per * desc2PNoche);
 					}
 					else if (personas == 3) {
-						total += costNoIncluido3Per - (costNoIncluido3Per * desc3PNoche);
+						totalNoIncluido += costNoIncluido3Per - (costNoIncluido3Per * desc3PNoche);
 					}
-					else total += costNoIncluido4Per - (costNoIncluido4Per * desc4PNoche);
+					else totalNoIncluido += costNoIncluido4Per - (costNoIncluido4Per * desc4PNoche);
 				}
-				else if (personas == 1) {
-					total += costNoInluido1Per;
+				else if (personas == 1) { // No hay descuento porque es de dia
+					totalNoIncluido += costNoInluido1Per;
 				}
 				else if (personas == 2) {
-					total += costNoIncluido2Per;
+					totalNoIncluido += costNoIncluido2Per;
 				}
 				else if (personas == 3) {
-					total += costNoIncluido3Per;
+					totalNoIncluido += costNoIncluido3Per;
 				}
-				else { total += costNoIncluido4Per; }
+				else { totalNoIncluido += costNoIncluido4Per; }
 					
-				if (vec1[i][j]->getClase() == "Primera") {
-					total += total * primera;
-				}
-				else if (vec1[i][j]->getClase() == "Segunda") {
-					total += total * Segunda;
-				}
-			}
-	return total;
 
-}
-void Contenedora::liberarHabitacion(string ced) {
-	for (int i = 0; i < tamN; i++)
-		for (int j = 0; j < tamM; j++)
-			if (vec1[i][j]->getCliente()->getCedula().compare(ced) == 0) {
-				vec1[i][j]->setCliente(nullptr);
-				vec1[i][j]->setInfo(nullptr);
-				vec1[i][j]->setEstado('L');
-			}
-}
-double Contenedora::dineroTodoIncluido(){
-	long double total = 0;
-	long int ninos = 0;
-	long int adultos = 0;
-	stringstream x;
-	for (int i = 0; i < tamN; i++)
-		for (int j = 0; j < tamM; j++) {
-			if (vec1[i][j]->getInfo()->getTodoIncluido() == 1) {
-				adultos += vec1[i][j]->getInfo()->getNumAdultos();
-				ninos += vec1[i][j]->getInfo()->getNumNinos();
-				total += (ninos * ninoTodoIncluido);
-				total += (adultos * adultoTodoIncluido);
-			}
-			if (vec1[i][j]->getClase() == "Primera") {
-				total += total * primera;
-			}
-			else if (vec1[i][j]->getClase() == "Segunda") {
-				total += total * Segunda;
-			}
-		}
-	return total;
-}
-double Contenedora::dineroNoTodoIncluido(){
-	long double total = 0;
-	long int personas = 0;
-	for (int i = 0; i < tamN; i++)
-		for (int j = 0; j < tamM; j++)
-			if (vec1[i][j]->getInfo()->getTodoIncluido() == 0) {
-				personas += (vec1[i][j]->getInfo()->getNumAdultos() + vec1[i][j]->getInfo()->getNumNinos());
-				if (vec1[i][j]->getHora() > 6) {
-
-					if (personas == 1) {
-						total += costNoInluido1Per - (costNoInluido1Per * desc1PNoche);
-					}
-					else if (personas == 2) {
-						total += costNoIncluido2Per - (costNoIncluido2Per * desc2PNoche);
-					}
-					else if (personas == 3) {
-						total += costNoIncluido3Per - (costNoIncluido3Per * desc3PNoche);
-					}
-					else total += costNoIncluido4Per - (costNoIncluido4Per * desc4PNoche);
-				}
-				else if (personas == 1) {
-					total += costNoInluido1Per;
-				}
-				else if (personas == 2) {
-					total += costNoIncluido2Per;
-				}
-				else if (personas == 3) {
-					total += costNoIncluido3Per;
-				}
-				else { total += costNoIncluido4Per; }
 
 				if (vec1[i][j]->getClase() == "Primera") {
-					total += total * primera;
+					totalNoIncluido += totalNoIncluido * primera;
 				}
 				else if (vec1[i][j]->getClase() == "Segunda") {
-					total += total * Segunda;
+					totalNoIncluido += totalNoIncluido * Segunda;
 				}
-			}
 
-return total;
+				ganancias += totalNoIncluido;
+				gananciasNoIncluido += totalNoIncluido;
+				return totalNoIncluido;
+			}
+	return -1; // No hay nadie en la habitacion
 }
+bool Contenedora::liberarHabitacion(string ced) {
+	for (int i = 0; i < tamN; i++)
+		for (int j = 0; j < tamM; j++)
+			if (vec1[i][j]->getCliente()) {
+				if (vec1[i][j]->getCliente()->getCedula().compare(ced) == 0) {
+					vec1[i][j]->setCliente(nullptr);
+					vec1[i][j]->setInfo(nullptr);
+					vec1[i][j]->setEstado('L');
+					return true;
+				}
+			}	
+	return false;
+}
+
+double Contenedora::getGananciasInclu() {
+	return gananciasIncluido;
+}
+double Contenedora::getGananciasNoInclu() {
+	return gananciasNoIncluido;
+}
+
 string Contenedora::dineroTotal(){
 	stringstream x;
-	x << "El dinero total recaudado por el hotel es: " << (dineroTodoIncluido() + dineroNoTodoIncluido()) << " Dolares" << endl;
+	x << "El dinero total recaudado por el hotel es: " << (ganancias) << " Dolares" << endl;
 	return x.str();
 }

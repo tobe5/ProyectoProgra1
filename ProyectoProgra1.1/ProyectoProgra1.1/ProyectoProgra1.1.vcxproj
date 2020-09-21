@@ -154,6 +154,7 @@
     <ClCompile Include="Cliente.cpp" />
     <ClCompile Include="Contenedora.cpp" />
     <ClCompile Include="Habitacion.cpp" />
+    <ClCompile Include="Hora.cpp" />
     <ClCompile Include="Info.cpp" />
     <ClCompile Include="ProyectoProgra1.1.cpp" />
   </ItemGroup>
@@ -161,6 +162,7 @@
     <ClInclude Include="Cliente.h" />
     <ClInclude Include="Contenedora.h" />
     <ClInclude Include="Habitacion.h" />
+    <ClInclude Include="Hora.h" />
     <ClInclude Include="Info.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
